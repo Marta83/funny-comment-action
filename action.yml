@@ -1,0 +1,22 @@
+name: 'Funny comments'
+description: 'Adds a funny comment on each issue or PR'
+author: 'Marta83'
+inputs:
+  GITHUB_TOKEN:
+    description: 'Github Token for authentication'
+    required: true
+  GIPHY_TOKEN: 
+    description: 'GIPHY Token to use in your funny comments, remember you can use github secrets'
+    required: true
+  comment_type:
+    description: "You can choose between chuck, to get random Chuck Norries facts,  gif, to get random gifs, or all, to get a random message"
+    required: true
+outputs:
+  comment-url:
+    description: 'The PR comment URL'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  color: "yellow"
+  icon: "bell"  

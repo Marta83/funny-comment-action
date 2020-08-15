@@ -1,0 +1,47 @@
+name: "build-test"
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  issues: 
+    types: [opened]
+  push:
+    branches:
+      - master
+      - 'releases/*'
+
+jobs:
+  build: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.0.0
+      - uses: actions/setup-node@v1.4.0
+        with:
+          node-version: 12.x
+      - run: |
+          npm i
+          npm run all
+  test-chuch: # make sure the action works on a clean machine without building
+    if: github.event_name == 'pull_request' || github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.0.0
+      - id: prComment
+        uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
+          comment_type: 'chuck'
+      - name: Print comment URL
+        run: echo "Comment URL- ${{ steps.prComment.outputs.comment-url }}"
+  test-gif: # make sure the action works on a clean machine without building
+    if: github.event_name == 'pull_request' || github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.0.0
+      - id: prComment
+        uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
+          comment_type: 'gif'
+      - name: Print comment URL
+        run: echo "Comment URL- ${{ steps.prComment.outputs.comment-url }}"
