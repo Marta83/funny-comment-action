@@ -17,19 +17,6 @@ jobs:
       - run: |
           npm ci
           npm run all
-      - name: Add node_module
-        run: |
-          git config user.email "prettykiller777@gmail.com"
-          git config user.name "Marta Ruiz"
-          git add node_modules/.
-          git commit -m "Add node modules"
-      - name: Verify no unstaged changes
-        run: |
-          if [[ "$(git status --porcelain)" != "" ]]; then
-            git status
-            echo "::error::Unstaged changes detected. Run 'npm run all' before commit"
-            exit 1
-          fi
   test: # make sure the action works on a clean machine without building
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
