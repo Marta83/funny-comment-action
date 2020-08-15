@@ -19,6 +19,8 @@ jobs:
           npm run all
       - name: Add node_module
         run: |
+          git config user.email "prettykiller777@gmail.com"
+          git config user.name "Marta Ruiz"
           git add node_modules/.
           git commit -m "Add node modules"
       - name: Verify no unstaged changes
