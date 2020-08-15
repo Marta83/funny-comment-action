@@ -1,10 +1,17 @@
-name: 'Github Action Template'
-description: 'simple typescript template for building GitHub Actions'
-author: 'notiz.dev'
+name: 'Funny comments'
+description: 'Adds a funny comment on each issue or PR'
+author: 'Marta83'
 inputs:
-  my_input:
-    description: 'input description here'
-    default: 'World'
+  comment:  
+    description: 'Comment you would like to post'
+    required: true
+    default: 'Funny comment'
+  GITHUB_TOKEN:
+    description: 'Github Token for authentication'
+    required: true
+outputs:
+  comment-url:
+    description: 'The PR comment URL'
 runs:
   using: 'node12'
   main: 'dist/index.js'

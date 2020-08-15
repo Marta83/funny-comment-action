@@ -1,4 +1,4 @@
-name: "test"
+name: "build-test"
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
@@ -7,15 +7,32 @@ on: # rebuild any PRs and main branch changes
       - 'releases/*'
 
 jobs:
-  test:
+  build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: run action
-      id: run_action
-      uses: ./
-      with: 
-        my_input: 'World'
-
-    - name: log action output
-      run: echo ${{steps.run_action.outputs.my_output}}     
+      - uses: actions/checkout@v2.0.0
+      - uses: actions/setup-node@v1.4.0
+        with:
+          node-version: 12.x
+      - run: |
+          npm ci
+          npm run all
+      - name: Verify no unstaged changes
+        run: |
+          if [[ "$(git status --porcelain)" != "" ]]; then
+            git status
+            echo "::error::Unstaged changes detected. Run 'npm run all' before commit"
+            exit 1
+          fi
+  test: # make sure the action works on a clean machine without building
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.0.0
+      - id: prComment
+        uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          comment: PR comment test
+      - name: Print comment URL
+        run: echo "Comment URL - ${{ steps.prComment.outputs.comment-url }}"
