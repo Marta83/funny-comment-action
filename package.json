@@ -29,7 +29,8 @@
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/github": "^4.0.0",
-    "@octokit/webhooks": "^7.0.0"
+    "@octokit/webhooks": "^7.0.0",
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@octokit/rest": "^16.43.0",

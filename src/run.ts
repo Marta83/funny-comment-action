@@ -1,9 +1,9 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
+import axios from 'axios';
 
 export async function run(): Promise<void> {
   try {
-    const comment = core.getInput('comment');
     const githubToken = core.getInput('GITHUB_TOKEN');
 
     const context = github.context;
@@ -12,14 +12,17 @@ export async function run(): Promise<void> {
       return;
     }
 
-    const pullRequestNumber = context.payload.pull_request.number;
+    const chuckResponse = await axios.get(
+      'https://api.chucknorris.io/jokes/random?category=dev'
+    );
 
+    const pullRequestNumber = context.payload.pull_request.number;
     const octokit = github.getOctokit(githubToken);
     const response = await octokit.issues.createComment({
       ...context.repo,
       // eslint-disable-next-line @typescript-eslint/camelcase
       issue_number: pullRequestNumber,
-      body: comment
+      body: chuckResponse.data.value
     });
 
     core.setOutput('comment-url', response.data.html_url);

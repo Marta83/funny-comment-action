@@ -3,6 +3,10 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import nock from 'nock';
 import * as process from 'process';
+import axios from 'axios';
+
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 beforeEach(() => {
   jest.resetModules();
@@ -14,11 +18,12 @@ beforeEach(() => {
       number: 1
     }
   };
+
+  mockedAxios.get.mockResolvedValue({data: {value: 'Test Comment'}});
 });
 
 test('comments on PR', async () => {
   process.env['INPUT_GITHUB_TOKEN'] = 'test-github-token';
-  process.env['INPUT_COMMENT'] = 'Test Comment';
   process.env['GITHUB_REPOSITORY'] = 'testowner/testrepo';
 
   nock('https://api.github.com')

@@ -2,10 +2,6 @@ name: 'Funny comments'
 description: 'Adds a funny comment on each issue or PR'
 author: 'Marta83'
 inputs:
-  comment:  
-    description: 'Comment you would like to post'
-    required: true
-    default: 'Funny comment'
   GITHUB_TOKEN:
     description: 'Github Token for authentication'
     required: true
