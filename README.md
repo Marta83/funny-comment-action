@@ -25,10 +25,6 @@ You can customise your funny comments with the comment_type argument.
 
 ### Additional Resources / Info
 
-[Note]: # (Be sure to include the DEV usernames of your collaborators, if any. )
-
-[Reminder]: # (Submissions are due on September 12th (11:59 PM PDT) and winners will be announced on September 23!)
-
 https://github.com/github-actions-up-and-running/pr-comment
 https://notiz.dev/blog/build-and-publish-your-first-github-action#quickstart
 https://api.chucknorris.io/
@@ -36,7 +32,7 @@ https://giphy.com/
 
 ### MIT License
 
-Copyright (c) 2020 Hemant Joshi
+Copyright (c) 2020 Marta Ruiz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
