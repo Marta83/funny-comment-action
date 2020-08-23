@@ -10,7 +10,7 @@ I'm also kind off a newbie with Typescript so I decided to use it to keep learni
 ### Yaml File or Link to Code
 
 Here is an example of how to use the Action:
-![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/m8hl9s63vmm9pktdgijy.png)
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/6msqz0dafgpmhi42qtcd.png)
 
 You can customise your funny comments with the comment_type argument.
 
