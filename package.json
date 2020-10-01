@@ -27,7 +27,7 @@
   "author": "Marta83",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "@octokit/webhooks": "^7.0.0",
     "axios": "^0.19.2"
